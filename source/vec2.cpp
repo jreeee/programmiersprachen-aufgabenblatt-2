@@ -1,5 +1,4 @@
 #include "vec2.hpp"
-//#include "iostream"
 
 Vec2& Vec2::operator+=(Vec2 const& rhs) {
     x+=rhs.x;
