@@ -7,7 +7,7 @@ Vec2& Vec2::operator+=(Vec2 const& rhs) {
     return *this;
 }
 
-Vec2& Vec2::operator+=(Vec2 const& rhs) {
+Vec2& Vec2::operator-=(Vec2 const& rhs) {
     x-=rhs.x;
     y-=rhs.y;
     return *this;
@@ -30,6 +30,23 @@ Vec2& Vec2::operator/=(float rhs) {
     return *this;
 }
 
-Vec2& operator+(Vec2 const& lhs, Vec2 const& rhs) {
-    return Vec2(lhs) += rhs;
+Vec2& operator+(Vec2 const& u, Vec2 const& v) {
+    return Vec2(u) += v;
+}
+
+Vec2 operator-(Vec2 const& u, Vec2 const& v) {
+    return Vec2(u) -= v;
+}
+
+Vec2& operator*(Vec2 const& u, float s) {
+    return Vec2(u) *= s;
+}
+
+Vec2 operator-(Vec2 const& u, float s) {
+    return Vec2(u) /= s;
+}
+
+Vec2 operator*(float s, Vec2 const& v) {
+    Vec2(v) *= s;
+    return Vec2(v);
 }
