@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
 #include "vec2.hpp"
+#include "mat2.hpp"
 
 TEST_CASE("testing vec2", "[vec2]")
 {
