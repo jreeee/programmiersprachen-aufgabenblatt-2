@@ -41,7 +41,7 @@ Vec2 operator*(Vec2 const& u, float s) {
     return Vec2(u) *= s;
 }
 
-Vec2 operator-(Vec2 const& u, float s) {
+Vec2 operator/(Vec2 const& u, float s) {
     return Vec2(u) /= s;
 }
 

@@ -15,7 +15,7 @@ struct Vec2
 Vec2 operator+(Vec2 const& u, Vec2 const& v);
 Vec2 operator-(Vec2 const& u, Vec2 const& v);
 Vec2 operator*(Vec2 const& u, float s);
-Vec2 operator-(Vec2 const& u, float s);
+Vec2 operator/(Vec2 const& u, float s);
 Vec2 operator*(float s, Vec2 const& v);
 
 #endif
