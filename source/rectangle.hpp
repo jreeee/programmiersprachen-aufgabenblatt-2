@@ -10,8 +10,8 @@ class rectangle {
     public:
 
     private:
-    Vec2 topr;
-    Vec2 botl;
+    Vec2 min_;
+    Vec2 max_;
 };
 
 #endif

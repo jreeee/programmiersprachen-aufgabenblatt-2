@@ -10,8 +10,8 @@ class circle {
     public:
 
     private:
-    Vec2 mid;
-    float rad;
+    Vec2 mid_;
+    float rad_;
 };
 
 #endif
