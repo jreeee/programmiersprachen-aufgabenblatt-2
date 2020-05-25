@@ -15,6 +15,7 @@ class Circle {
     Circle(Vec2 const& v, float f, Color const& c);
 
     float circumference();
+    void draw(Window const& w) const;
 
     private:
     Vec2 mid_;
