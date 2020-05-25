@@ -993,11 +993,11 @@ TEST_CASE("testing the 2.6 operators", "[mat2]")
   REQUIRE(tmpv.x == Approx(2.0f));
   REQUIRE(tmpv.y == Approx(2.0f));
   tmpv = m3 * v1;
-  REQUIRE(tmpv.x == Approx(14.0f));
-  REQUIRE(tmpv.y == Approx(100.0f));
+  REQUIRE(tmpv.x == Approx(34.0f));
+  REQUIRE(tmpv.y == Approx(50.0f));
   tmpv = m2 * v2;
-  REQUIRE(tmpv.x == Approx(-30.0f));
-  REQUIRE(tmpv.y == Approx(88.0f));
+  REQUIRE(tmpv.x == Approx(-36.0f));
+  REQUIRE(tmpv.y == Approx(80.0f));
 
   //determinants
   float det = m1.det();
