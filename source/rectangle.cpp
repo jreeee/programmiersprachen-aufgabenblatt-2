@@ -32,3 +32,11 @@ float Rectangle::circumference() {
     return 2 * (xlen_ + ylen_);
 }
 
+void Rectangle::draw(Window const& w) const {
+    w.draw_line(max_.x, max_.y, max_.x, min_.y, col_.red, col_.green, col_.blue, 1.0f);
+    w.draw_line(max_.x, min_.y, min_.x, min_.y, col_.red, col_.green, col_.blue, 1.0f);
+    w.draw_line(min_.x, min_.y, min_.x, max_.y, col_.red, col_.green, col_.blue, 1.0f);
+    w.draw_line(min_.x, max_.y, max_.x, max_.y, col_.red, col_.green, col_.blue, 1.0f);
+}
+
+
