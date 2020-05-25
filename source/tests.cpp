@@ -1113,7 +1113,7 @@ TEST_CASE("testing the 2.6 operators", "[mat2]")
 //Color tests
 TEST_CASE("testing the color struct", "[color]") 
 {
-  color def{};
+  Color def{};
   REQUIRE(def.red == Approx(0.5f));
   REQUIRE(def.green == Approx(0.5f));
   REQUIRE(def.blue == Approx(0.5f));
