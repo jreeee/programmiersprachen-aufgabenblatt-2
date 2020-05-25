@@ -3,6 +3,8 @@
 #include "vec2.hpp"
 #include "mat2.hpp"
 #include "color.hpp"
+#include "circle.hpp"
+#include "rectangle.hpp"
 
 
 //Vec2 tests
@@ -1127,6 +1129,44 @@ TEST_CASE("testing the color struct", "[color]")
   REQUIRE(def.red == Approx(0.0f));
   REQUIRE(def.green == Approx(0.0f));
   REQUIRE(def.blue == Approx(0.0f));
+}
+
+//circumference test 
+TEST_CASE("testing the circumference of circles", "[circle]")
+{
+  Circle c1{{},2.0f};
+  float test = c1.circumference();
+  REQUIRE(test == Approx(M_PI*4));
+  Circle c2{{23.4f, 67.1f}, 0.0f};
+  test = c2.circumference();
+  REQUIRE(test == Approx(0.0f));
+  c2 = {};
+  test = c2.circumference();
+  REQUIRE(test == Approx(M_PI*100));
+  c2 = {-1.0f, {}};
+  test = c2.circumference();
+  REQUIRE(test == Approx(M_PI *2));
+}
+TEST_CASE("testing the circumference of rectangle", "[rectangle]")
+{
+  Rectangle r1{};
+  float test = r1.circumference();
+  REQUIRE(test == Approx(200.0f));
+  r1 = {{}, {30.0f, 20.0f}};
+  test = r1.circumference();
+  REQUIRE(test == Approx(100.0f));
+  r1 = {{20.0f, 20.0f}, {}};
+  test = r1.circumference();
+  REQUIRE(test == Approx(80.0f));
+  r1 = {{-10.0f, -20.0f}, {-5.0f, 0.0f}};
+  test = r1.circumference();
+  REQUIRE(test == Approx(50.0f));
+  r1 = {{-5.0f, 0.0f}, {-10.0f, -20.0f}};
+  test = r1.circumference();
+  REQUIRE(test == Approx(50.0f));
+  r1 = {{50.0f, 50.0f}, {0.0f, 0.0f}};
+  test = r1.circumference();
+  REQUIRE(test == Approx(200.0f));
 }
 
 int main(int argc, char *argv[])
