@@ -2,6 +2,10 @@
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
+#include "circle.hpp"
+#include "rectangle.hpp"
+#include "color.hpp"
+#include "vec2.hpp"
 
 
 int main(int argc, char* argv[])
@@ -12,6 +16,13 @@ int main(int argc, char* argv[])
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       win.close();
     }
+
+    //simple first rectangle test
+    Rectangle test {};
+    test.draw(win);
+    //simple first circle test
+    Circle circ {};
+    circ.draw(win);
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
