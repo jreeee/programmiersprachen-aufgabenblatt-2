@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include "vec2.hpp"
 #include "mat2.hpp"
+#include "color.hpp"
 
 
 //Vec2 tests
@@ -1105,6 +1106,27 @@ TEST_CASE("testing the 2.6 operators", "[mat2]")
   REQUIRE(tmpm.e_10 == Approx(1.0f));
   REQUIRE(tmpm.e_01 == Approx(-1.0f));
   REQUIRE(tmpm.e_11 == Approx(0.0f));
+}
+
+//Color tests
+TEST_CASE("testing the color struct", "[color]") 
+{
+  color def{};
+  REQUIRE(def.red == Approx(0.5f));
+  REQUIRE(def.green == Approx(0.5f));
+  REQUIRE(def.blue == Approx(0.5f));
+  def = {0.0f, 0.0f, 1.0f};
+  REQUIRE(def.red == Approx(0.0f));
+  REQUIRE(def.green == Approx(0.0f));
+  REQUIRE(def.blue == Approx(1.0f));
+  def = {1.0f, 1.0f, 1.0f};
+  REQUIRE(def.red == Approx(1.0f));
+  REQUIRE(def.green == Approx(1.0f));
+  REQUIRE(def.blue == Approx(1.0f));
+  def = {0.0f, 0.0f, 0.0f};
+  REQUIRE(def.red == Approx(0.0f));
+  REQUIRE(def.green == Approx(0.0f));
+  REQUIRE(def.blue == Approx(0.0f));
 }
 
 int main(int argc, char *argv[])
