@@ -964,6 +964,148 @@ TEST_CASE("testing matrix multiplication", "[mat2]")
   REQUIRE(tmp.e_01 == Approx(11.0f));
   REQUIRE(tmp.e_11 == Approx(11.0f));
 }
+TEST_CASE("testing the 2.6 operators", "[mat2]")
+{
+  const Mat2 m1{};
+  const Mat2 m2{3.0f, 7.0f, 9.0f, 13.0f};
+  const Mat2 m3{-5.0f, -2.0f, -12.0f, -8.0f};
+  const Mat2 m4{0.0f, 2.0f, 3.0f, 8.0f};
+  const Mat2 m5{0.0f,0.0f,0.0f,0.0f};
+  const Mat2 m6{1.0f, 1.0f, 1.0f, 1.0f};
+
+  const Vec2 v1{-2.0f, -5.0f};
+  const Vec2 v2{-3.0f, 4.0f};
+  const Vec2 v3{1.0f, 1.0f};
+  const Vec2 v4{0.0f, 0.0f};
+  const Vec2 v5{7.0f, 5.0f};
+
+  //Mat2 * Vec2
+  Vec2 tmpv = m1 * v1;
+  REQUIRE(tmpv.x == Approx(-2.0f));
+  REQUIRE(tmpv.y == Approx(-5.0f));
+  tmpv = m5 * v5;
+  REQUIRE(tmpv.x == Approx(0.0f));
+  REQUIRE(tmpv.y == Approx(0.0f));
+  tmpv = m6 * v3;
+  REQUIRE(tmpv.x == Approx(2.0f));
+  REQUIRE(tmpv.y == Approx(2.0f));
+  tmpv = m3 * v1;
+  REQUIRE(tmpv.x == Approx(14.0f));
+  REQUIRE(tmpv.y == Approx(100.0f));
+  tmpv = m2 * v2;
+  REQUIRE(tmpv.x == Approx(-30.0f));
+  REQUIRE(tmpv.y == Approx(88.0f));
+
+  //determinants
+  float det = m1.det();
+  REQUIRE(det == Approx(1.0f));
+  det = m2.det();
+  REQUIRE(det == Approx(-24.0f));
+  det = m3.det();
+  REQUIRE(det == Approx(16.0f));
+  det = m4.det();
+  REQUIRE(det == Approx(-6.0f));
+  det = m5.det();
+  REQUIRE(det == Approx(0.0f));
+  det = m6.det();
+  REQUIRE(det == Approx(0.0f));
+  
+  //inverse
+  Mat2 tmpm = inverse(m1);
+  REQUIRE(tmpm.e_00 == Approx(1.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(1.0f));
+  tmpm = inverse(m2);
+  REQUIRE(tmpm.e_00 == Approx(-0.541666f));
+  REQUIRE(tmpm.e_10 == Approx(0.291666f));
+  REQUIRE(tmpm.e_01 == Approx(0.375f));
+  REQUIRE(tmpm.e_11 == Approx(-0.125f));
+  tmpm = inverse(m3);
+  REQUIRE(tmpm.e_00 == Approx(-0.5f));
+  REQUIRE(tmpm.e_10 == Approx(0.125f));
+  REQUIRE(tmpm.e_01 == Approx(0.75f));
+  REQUIRE(tmpm.e_11 == Approx(-0.3125f));
+  tmpm = inverse(m4);
+  REQUIRE(tmpm.e_00 == Approx(-1.333333f));
+  REQUIRE(tmpm.e_10 == Approx(0.333333f));
+  REQUIRE(tmpm.e_01 == Approx(0.5f));
+  REQUIRE(tmpm.e_11 == Approx(0.0f));
+  tmpm = inverse(m5);
+  REQUIRE(tmpm.e_00 == Approx(0.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(0.0f));
+  tmpm = inverse(m6);
+  REQUIRE(tmpm.e_00 == Approx(1.0f));
+  REQUIRE(tmpm.e_10 == Approx(1.0f));
+  REQUIRE(tmpm.e_01 == Approx(1.0f));
+  REQUIRE(tmpm.e_11 == Approx(1.0f));
+
+  //transpose
+  tmpm = transpose(m1);
+  REQUIRE(tmpm.e_00 == Approx(1.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(1.0f));
+  tmpm = transpose(m2);
+  REQUIRE(tmpm.e_00 == Approx(3.0f));
+  REQUIRE(tmpm.e_10 == Approx(9.0f));
+  REQUIRE(tmpm.e_01 == Approx(7.0f));
+  REQUIRE(tmpm.e_11 == Approx(13.0f));
+  tmpm = transpose(m3);
+  REQUIRE(tmpm.e_00 == Approx(-5.0f));
+  REQUIRE(tmpm.e_10 == Approx(-12.0f));
+  REQUIRE(tmpm.e_01 == Approx(-2.0f));
+  REQUIRE(tmpm.e_11 == Approx(-8.0f));
+  tmpm = transpose(m4);
+  REQUIRE(tmpm.e_00 == Approx(0.0f));
+  REQUIRE(tmpm.e_10 == Approx(3.0f));
+  REQUIRE(tmpm.e_01 == Approx(2.0f));
+  REQUIRE(tmpm.e_11 == Approx(8.0f));
+  tmpm = transpose(m5);
+  REQUIRE(tmpm.e_00 == Approx(0.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(0.0f));
+  tmpm = transpose(m6);
+  REQUIRE(tmpm.e_00 == Approx(1.0f));
+  REQUIRE(tmpm.e_10 == Approx(1.0f));
+  REQUIRE(tmpm.e_01 == Approx(1.0f));
+  REQUIRE(tmpm.e_11 == Approx(1.0f));
+
+  //rotation
+  tmpm = make_rotation_mat2(0);
+  REQUIRE(tmpm.e_00 == Approx(1.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(1.0f));
+  tmpm = make_rotation_mat2(M_PI);
+  REQUIRE(tmpm.e_00 == Approx(-1.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(-1.0f));
+  tmpm = make_rotation_mat2(M_PI / 2);
+  REQUIRE(tmpm.e_00 == Approx(0.0f));
+  REQUIRE(tmpm.e_10 == Approx(-1.0f));
+  REQUIRE(tmpm.e_01 == Approx(1.0f));
+  REQUIRE(tmpm.e_11 == Approx(0.0f));
+  tmpm = make_rotation_mat2(2 * M_PI);
+  REQUIRE(tmpm.e_00 == Approx(1.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(1.0f));
+  tmpm = make_rotation_mat2(-M_PI);
+  REQUIRE(tmpm.e_00 == Approx(-1.0f));
+  REQUIRE(tmpm.e_10 == Approx(0.0f));
+  REQUIRE(tmpm.e_01 == Approx(0.0f));
+  REQUIRE(tmpm.e_11 == Approx(-1.0f));
+  tmpm = make_rotation_mat2(-M_PI / 2);
+  REQUIRE(tmpm.e_00 == Approx(0.0f));
+  REQUIRE(tmpm.e_10 == Approx(1.0f));
+  REQUIRE(tmpm.e_01 == Approx(-1.0f));
+  REQUIRE(tmpm.e_11 == Approx(0.0f));
+}
 
 int main(int argc, char *argv[])
 {
