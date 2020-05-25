@@ -5,9 +5,14 @@
 #include "color.hpp"
 #include "window.hpp"
 
-class circle {
+class Circle {
 
     public:
+    Circle();
+    Circle(float f, Vec2 const& v);
+    Circle(Vec2 const& v, float f);
+
+    float circumference();
 
     private:
     Vec2 mid_;
