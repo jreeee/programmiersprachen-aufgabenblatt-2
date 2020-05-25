@@ -1,4 +1,5 @@
 #include "vec2.hpp"
+#include <iostream>
 
 Vec2& Vec2::operator+=(Vec2 const& rhs) {
     x+=rhs.x;
@@ -20,6 +21,7 @@ Vec2& Vec2::operator*=(float rhs) {
 
 Vec2& Vec2::operator/=(float rhs) {
     if (rhs == 0) {
+        std::cout << "You tried to divide by zero \n";
         x=y=0;
     }
     else {
