@@ -3,6 +3,8 @@
 #include "vec2.hpp"
 #include "mat2.hpp"
 
+
+//Vec2 tests
 TEST_CASE("testing vec2", "[vec2]")
 {
   Vec2 a = {};
@@ -892,6 +894,77 @@ TEST_CASE("testing basic operators /=, /", "[vec2]")
   REQUIRE(tmp.x == Approx(0.333333f));
   REQUIRE(tmp.y == Approx(0.333333f));
 }
+
+//Mat2 tests
+TEST_CASE("testing matrix multiplication", "[mat2]")
+{
+  const Mat2 a{};
+  const Mat2 b{3.0f, 7.0f, 9.0f, 13.0f};
+  const Mat2 c{-5.0f, -2.0f, -12.0f, -8.0f};
+  const Mat2 d{0.0f, 2.0f, 3.0f, 8.0f};
+  const Mat2 e{0.0f,0.0f,0.0f,0.0f};
+  const Mat2 f{1.0f, 1.0f, 1.0f, 1.0f};
+
+  //testing default matrix
+  Mat2 tmp{a};
+  REQUIRE(tmp.e_00 == Approx(1.0f));
+  REQUIRE(tmp.e_10 == Approx(0.0f));
+  REQUIRE(tmp.e_01 == Approx(0.0f));
+  REQUIRE(tmp.e_11 == Approx(1.0f));
+  //testing custom matrix
+  tmp = b;
+  REQUIRE(tmp.e_00 == Approx(3.0f));
+  REQUIRE(tmp.e_10 == Approx(7.0f));
+  REQUIRE(tmp.e_01 == Approx(9.0f));
+  REQUIRE(tmp.e_11 == Approx(13.0f));
+
+  //testing *= and *
+  tmp = a;
+  tmp *= b;
+  REQUIRE(tmp.e_00 == Approx(3.0f));
+  REQUIRE(tmp.e_10 == Approx(7.0f));
+  REQUIRE(tmp.e_01 == Approx(9.0f));
+  REQUIRE(tmp.e_11 == Approx(13.0f));
+  tmp = a * b;
+  REQUIRE(tmp.e_00 == Approx(3.0f));
+  REQUIRE(tmp.e_10 == Approx(7.0f));
+  REQUIRE(tmp.e_01 == Approx(9.0f));
+  REQUIRE(tmp.e_11 == Approx(13.0f));
+  tmp = b;
+  tmp *= c;
+  REQUIRE(tmp.e_00 == Approx(-99.0f));
+  REQUIRE(tmp.e_10 == Approx(-62.0f));
+  REQUIRE(tmp.e_01 == Approx(-201.0f));
+  REQUIRE(tmp.e_11 == Approx(-122.0f));
+  tmp = b * c;
+  REQUIRE(tmp.e_00 == Approx(-99.0f));
+  REQUIRE(tmp.e_10 == Approx(-62.0f));
+  REQUIRE(tmp.e_01 == Approx(-201.0f));
+  REQUIRE(tmp.e_11 == Approx(-122.0f));
+  tmp = e;
+  tmp *= b;
+  REQUIRE(tmp.e_00 == Approx(0.0f));
+  REQUIRE(tmp.e_10 == Approx(0.0f));
+  REQUIRE(tmp.e_01 == Approx(0.0f));
+  REQUIRE(tmp.e_11 == Approx(0.0f));
+  tmp = e * b;
+  REQUIRE(tmp.e_00 == Approx(0.0f));
+  REQUIRE(tmp.e_10 == Approx(0.0f));
+  REQUIRE(tmp.e_01 == Approx(0.0f));
+  REQUIRE(tmp.e_11 == Approx(0.0f));
+  tmp = d * f;
+  REQUIRE(tmp.e_00 == Approx(2.0f));
+  REQUIRE(tmp.e_10 == Approx(2.0f));
+  REQUIRE(tmp.e_01 == Approx(11.0f));
+  REQUIRE(tmp.e_11 == Approx(11.0f));
+  tmp = d;
+  tmp *= f;
+  REQUIRE(tmp.e_00 == Approx(2.0f));
+  REQUIRE(tmp.e_10 == Approx(2.0f));
+  REQUIRE(tmp.e_01 == Approx(11.0f));
+  REQUIRE(tmp.e_11 == Approx(11.0f));
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
