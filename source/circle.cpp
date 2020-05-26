@@ -45,7 +45,7 @@ void Circle::draw(Window const& w, bool const h) const {
     Vec2 v1_{origin_};
     Vec2 v2_{origin_};
     int i_ = 1;
-    const int seg_ = 50;
+    const int seg_ = 200;
     const float part_ = seg_ / (2 * M_PI);
     v2_ = v2_ + mid_;
     while (i_ <= seg_) {
@@ -56,6 +56,16 @@ void Circle::draw(Window const& w, bool const h) const {
         w.draw_line(v1_.x, v1_.y, v2_.x, v2_.y, c_.red, c_.green, c_.blue, 1.0f);
         i_++;
     }
+}
+
+void Circle::line(Window const& w, float time, float passed, float thickness) {
+    float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
+    const Vec2 origin_ {r_, r_};
+    Vec2 v1_{origin_};
+    const float part_ = 60 / (2 * M_PI);
+    v1_ = make_rotation_mat2(((passed / time) / -part_) + (3.0f / 4.0f) * M_PI) * v1_ ;
+    v1_ = mid_ + v1_;
+    w.draw_line(v1_.x, v1_.y, mid_.x, mid_.y, col_.red, col_.green, col_.blue, thickness);
 }
 
 bool Circle::is_inside(Vec2 const& v) {
