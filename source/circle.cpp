@@ -58,18 +58,19 @@ void Circle::draw(Window const& w, bool const h) const {
     }
 }
 
-void Circle::line(Window const& w, float time, float passed, float thickness) {
-    float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
-    const Vec2 origin_ {r_, r_};
-    Vec2 v1_{origin_};
-    const float part_ = 60 / (2 * M_PI);
-    v1_ = make_rotation_mat2(((passed / time) / -part_) + (3.0f / 4.0f) * M_PI) * v1_ ;
-    v1_ = mid_ + v1_;
-    w.draw_line(v1_.x, v1_.y, mid_.x, mid_.y, col_.red, col_.green, col_.blue, thickness);
-}
-
 bool Circle::is_inside(Vec2 const& v) {
     Vec2 vdist_ = mid_ - v;
     float dist_ = sqrt((vdist_.x * vdist_.x) + (vdist_.y * vdist_.y));
     return (dist_ <= rad_ ? true : false);
+}
+
+void Circle::line(Window const& w, float time, float passed, float thickness) {
+    float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
+    const Vec2 origin_ {r_, r_};
+    Vec2 v1_{origin_};
+    const float zero_ = (3.0f / 4.0f) * M_PI;
+    const float part_ = 60 / (2 * M_PI);
+    v1_ = make_rotation_mat2(((passed / time) / -part_) + zero_) * v1_ ;
+    v1_ = mid_ + v1_;
+    w.draw_line(v1_.x, v1_.y, mid_.x, mid_.y, col_.red, col_.green, col_.blue, thickness);
 }

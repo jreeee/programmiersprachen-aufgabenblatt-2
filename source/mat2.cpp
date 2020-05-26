@@ -4,7 +4,8 @@
 #include <iostream>
 
 Mat2& Mat2::operator*=(Mat2 const& m) {
-    Mat2 a{*this};
+    //cooler but overly complicated
+    /*Mat2 a{*this};
     Mat2 b{
         a.e_00 * m.e_00 + a.e_10 * m.e_01,
         a.e_00 * m.e_10 + a.e_10 * m.e_11,
@@ -12,6 +13,15 @@ Mat2& Mat2::operator*=(Mat2 const& m) {
         a.e_01 * m.e_10 + a.e_11 * m.e_11 };
 
     *this = b;
+    return *this; */
+    float tmp_00 = e_00 * m.e_00 + e_10 * m.e_01;
+    float tmp_10 = e_00 * m.e_10 + e_10 * m.e_11;
+    float tmp_01 = e_01 * m.e_00 + e_11 * m.e_01;
+    float tmp_11 = e_01 * m.e_10 + e_11 * m.e_11;
+    e_00 = tmp_00;
+    e_10 = tmp_10;
+    e_01 = tmp_01;
+    e_11 = tmp_11;
     return *this;
 }
 
