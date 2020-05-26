@@ -12,14 +12,16 @@ class Rectangle {
     Rectangle(Vec2 const& v1, Vec2 const& v2);
     Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c);
     Rectangle(Color const& c, Vec2 const& v1, Vec2 const& v2);
+    Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c, Color const& h);
     
     float circumference();
-    void draw(Window const& w) const;
+    void draw(Window const& w, bool highlight = false) const;
 
     private:
     Vec2 min_;
     Vec2 max_;
     Color col_;
+    Color highlight_color_;
 };
 
 #endif
