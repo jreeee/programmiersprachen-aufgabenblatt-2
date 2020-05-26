@@ -1170,6 +1170,74 @@ TEST_CASE("testing the circumference of rectangle", "[rectangle]")
   REQUIRE(test == Approx(200.0f));
 }
 
+//is_inside tests
+TEST_CASE("testing is_inside for circles", "[circle]") 
+{
+  Circle c1 {3.1f, {20.0f, 10.0f}};
+  Circle c2 {-2.7f, {-2.0f, 1.0f}};
+  Circle c3 {0.0f, {1.0f, -1.0f}};
+  Vec2 v1{21.0f, 12.0f};
+  Vec2 v2{23.0f, 11.0f};
+  Vec2 v3{0.69f, 0.7f};
+  Vec2 v4{0.68f, 0.7f};
+  Vec2 v5{1.0f, -1.0f};
+  Vec2 v6{0.99f, -0.99f};
+  bool b = c1.is_inside(v1);
+  REQUIRE(b);
+  b = c1.is_inside(v2);
+  REQUIRE(b == false);
+  b = c2.is_inside(v3);
+  REQUIRE(b == false);
+  b = c2.is_inside(v4);
+  REQUIRE(b == false);
+  b = c3.is_inside(v5);
+  REQUIRE(b);
+  b = c3.is_inside(v6);
+  REQUIRE(b == false);
+}
+TEST_CASE("testing is_inside for rectangle", "[rectangle]") 
+{
+  Rectangle r1 {{1.0f, 1.0f}, {-1.0f, -1.0f}};
+  Rectangle r2 {{-1.0f, -1.0f}, {1.0f, 1.0f}};
+  Rectangle r3 {{}, {}};
+  Rectangle r4 {{-2.0f, 34.0f}, {12.0f, -12.0f}};
+  Vec2 v1 {1.0f, 1.0f};
+  Vec2 v2 {0.5f, 0.5f};
+  Vec2 v3 {1.1f, 0.9f};
+  Vec2 v4 {11.0f, 33.0f};
+  Vec2 v5 {};
+  bool b1 = r1.is_inside(v1);
+  bool b2 = r1.is_inside(v2);
+  bool b3 = r1.is_inside(v3);
+  bool b4 = r1.is_inside(v4);
+  bool b5 = r1.is_inside(v5);
+  REQUIRE(b1);
+  REQUIRE(b2);
+  REQUIRE(b3 == false);
+  REQUIRE(b4 == false);
+  REQUIRE(b5);
+  b1 = r3.is_inside(v1);
+  b2 = r3.is_inside(v2);
+  b3 = r3.is_inside(v3);
+  b4 = r3.is_inside(v4);
+  b5 = r3.is_inside(v5);
+  REQUIRE(b1 == false);
+  REQUIRE(b2 == false);
+  REQUIRE(b3 == false);
+  REQUIRE(b4 == false);
+  REQUIRE(b5);
+  b1 = r4.is_inside(v1);
+  b2 = r4.is_inside(v2);
+  b3 = r4.is_inside(v3);
+  b4 = r4.is_inside(v4);
+  b5 = r4.is_inside(v5);
+  REQUIRE(b1);
+  REQUIRE(b2);
+  REQUIRE(b3);
+  REQUIRE(b4);
+  REQUIRE(b5);
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

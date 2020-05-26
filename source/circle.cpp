@@ -64,13 +64,15 @@ void Circle::draw(Window const& w, bool const h) const {
 bool Circle::is_inside(Vec2 const& v) {
     Vec2 vdist_ = mid_ - v;
     float dist_ = sqrt((vdist_.x * vdist_.x) + (vdist_.y * vdist_.y));
-    return (dist_ <= rad_ ? true : false);
+    return (dist_ <= abs(rad_) ? true : false);
 }
 
+//this method is only needed for the clock
 void Circle::line(Window const& w, float time, float passed, float thickness) {
     float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
     const Vec2 origin_ {r_, r_};
     Vec2 v1_{origin_};
+    //used to rotate the default vector via rotation matrix to the 12' position
     const float zero_ = (3.0f / 4.0f) * M_PI;
     const float part_ = 60 / (2 * M_PI);
     v1_ = make_rotation_mat2(((passed / time) / -part_) + zero_) * v1_ ;
