@@ -14,18 +14,19 @@ Rectangle::Rectangle() {
 Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2) {
     min_ = v1;
     max_ = v2;
-    col_ = {};
     highlight_color_ = {0.0f, 1.0f, 0.0f};
 }
 Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c) {
-    Rectangle{v1, v2};
+    min_ = v1;
+    max_ = v2;
     col_ = c;
+    highlight_color_ = {0.0f, 1.0f, 0.0f};
 }
-Rectangle::Rectangle(Color const& c, Vec2 const& v1, Vec2 const& v2) {
-    Rectangle{v1, v2, c};
-}
+
 Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c, Color const& h) {
-    Rectangle{v1, v2, c};
+    min_ = v1;
+    max_ = v2;
+    col_ = c;
     highlight_color_ = h;
 }
 

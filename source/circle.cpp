@@ -16,21 +16,20 @@ Circle::Circle() {
 Circle::Circle(float f, Vec2 const& v) {
     rad_ = f;
     mid_ = v;
-    col_ = {};
     highlight_color_ = {1.0f, 0.0f, 0.0f};
 }
-Circle::Circle(Vec2 const& v, float f) {
-    Circle{f, v};
-}
+
 Circle::Circle(float f, Vec2 const& v, Color const& c) {
-    Circle{f, v};
+    rad_ = f;
+    mid_ = v;
     col_ = c;
+    highlight_color_ = {1.0f, 0.0f, 0.0f};
 }
-Circle::Circle(Vec2 const& v, float f, Color const& c) {
-    Circle{f, v, c};
-}
+
 Circle::Circle(float f, Vec2 const& v, Color const& c, Color const& h) {
-    Circle{f, v, c};
+    rad_ = f;
+    mid_ = v;
+    col_ = c;
     highlight_color_ = h;
 }
 

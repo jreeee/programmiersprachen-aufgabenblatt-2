@@ -5,6 +5,7 @@
 #include "color.hpp"
 #include "circle.hpp"
 #include "rectangle.hpp"
+#include "window.hpp"
 
 
 //Vec2 tests
@@ -1134,10 +1135,10 @@ TEST_CASE("testing the color struct", "[color]")
 //circumference test 
 TEST_CASE("testing the circumference of circles", "[circle]")
 {
-  Circle c1{{},2.0f};
+  Circle c1{2.0f, {}};
   float test = c1.circumference();
   REQUIRE(test == Approx(M_PI*4));
-  Circle c2{{23.4f, 67.1f}, 0.0f};
+  Circle c2{0.0f, {23.4f, 67.1f}};
   test = c2.circumference();
   REQUIRE(test == Approx(0.0f));
   c2 = {};
