@@ -51,7 +51,8 @@ float Circle::circumference() {
 void Circle::draw(Window const& w, bool const h) const {
     Color c_;
     h ? c_ = highlight_color_ : c_ = col_;
-    const Vec2 origin_ {rad_, rad_};
+    float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
+    const Vec2 origin_ {r_, r_};
     Vec2 v1_{origin_};
     Vec2 v2_{origin_};
     int i_ = 1;
@@ -66,4 +67,10 @@ void Circle::draw(Window const& w, bool const h) const {
         w.draw_line(v1_.x, v1_.y, v2_.x, v2_.y, c_.red, c_.green, c_.blue, 1.0f);
         i_++;
     }
+}
+
+bool Circle::is_inside(Vec2 const& v) {
+    Vec2 vdist_ = mid_ - v;
+    float dist_ = sqrt((vdist_.x * vdist_.x) + (vdist_.y * vdist_.y));
+    return (dist_ <= rad_ ? true : false);
 }
