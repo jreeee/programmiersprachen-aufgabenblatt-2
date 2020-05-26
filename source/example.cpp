@@ -18,15 +18,19 @@ int main(int argc, char* argv[])
     }
 
     //simple first rectangle test
+    auto mouse_ = win.mouse_position();
+    Vec2 mp_{float(mouse_.first), float(mouse_.second)};
     Rectangle rec1_ {};
     rec1_.draw(win);
     Rectangle rec2_ {{60.0f, 40.0f},{120.0f, 120.0f}};
-    rec2_.draw(win, true);
+    bool ir_ = rec2_.is_inside(mp_);
+    rec2_.draw(win, ir_);
     //simple first circle test
     Circle cir1_ {};
     cir1_.draw(win);
-    Circle cir2_ {12.0f, {400.0f, 500.0f}};
-    cir2_.draw(win, true);
+    Circle cir2_ {200.0f, {400.0f, 400.0f}};
+    bool ic_ = cir2_.is_inside(mp_);
+    cir2_.draw(win, ic_);
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 
