@@ -1,32 +1,31 @@
 #include "vec2.hpp"
 #include <iostream>
 
-Vec2& Vec2::operator+=(Vec2 const& rhs) {
-    x+=rhs.x;
-    y+=rhs.y;
+Vec2& Vec2::operator+=(Vec2 const& v) {
+    x+=v.x;
+    y+=v.y;
     return *this;
 }
 
-Vec2& Vec2::operator-=(Vec2 const& rhs) {
-    x-=rhs.x;
-    y-=rhs.y;
+Vec2& Vec2::operator-=(Vec2 const& v) {
+    x-=v.x;
+    y-=v.y;
     return *this;
 }
 
-Vec2& Vec2::operator*=(float rhs) {
-    x*=rhs;
-    y*=rhs;
+Vec2& Vec2::operator*=(float s) {
+    x*=s;
+    y*=s;
     return *this;
 }
 
-Vec2& Vec2::operator/=(float rhs) {
-    if (rhs == 0) {
-        std::cout << "You tried to divide by zero \n";
-        x=y=0;
+Vec2& Vec2::operator/=(float s) {
+    if (s == 0.0f) {
+        std::cout << "ERROR: division by zero (Vec2)\n";
     }
     else {
-        x/=rhs;
-        y/=rhs;
+        x/=s;
+        y/=s;
     }
     return *this;
 }

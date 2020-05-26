@@ -30,7 +30,7 @@ Vec2 operator*(Mat2 const& m, Vec2 const& v) {
 Mat2 inverse(Mat2 const& m) {
     float det = m.det();
     if (det == 0.0f) {
-        std::cout << "The determinant of the Matrix is equal to 0 \n";
+        std::cout << "ERROR: The determiant is zero (Mat2)\n";
         return m;
     }
     return {m.e_11 / det, -m.e_10 / det, -m.e_01 / det, m.e_00 / det};
