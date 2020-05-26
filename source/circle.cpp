@@ -8,7 +8,7 @@
 #include <iostream>
 
 Circle::Circle() {
-    mid_ = {0.0f, 0.0f};
+    mid_ = {100.0f, 100.0f};
     rad_ = 50.0f;
     col_ = {};
 }
@@ -38,19 +38,19 @@ float Circle::circumference() {
 }
 
 void Circle::draw(Window const& w) const {
-    Vec2 v1_{0.0f, rad_};
-    Vec2 v2_{v1_};
-    int i_ = 0;
+    const Vec2 origin_ {rad_, rad_};
+    Vec2 v1_{origin_};
+    Vec2 v2_{origin_};
+    int i_ = 1;
     const int seg_ = 50;
-    const float part_ = M_PI / seg_;
-    Mat2 rotm_{make_rotation_mat2(1/seg_)};
-
+    const float part_ = seg_ / (2 * M_PI);
+    v2_ = v2_ + mid_;
     while (i_ <= seg_) {
-        i_++;
-        rotm_ = make_rotation_mat2(i_ / part_);
-        std::cout << i_ / part_ << " | " << i_ << " | " << seg_;
         v1_ = v2_;
-        v2_ = rotm_ * v2_;
+        v2_ = origin_;
+        v2_ = make_rotation_mat2(i_ / part_) * v2_;
+        v2_ = mid_ + v2_;
         w.draw_line(v1_.x, v1_.y, v2_.x, v2_.y, col_.red, col_.green, col_.blue, 1.0f);
+        i_++;
     }
 }
