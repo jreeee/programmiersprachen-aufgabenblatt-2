@@ -2,6 +2,7 @@
 #include "color.hpp"
 #include "window.hpp"
 #include "rectangle.hpp"
+#include <iostream>
 
 #include <cmath>
 
@@ -46,9 +47,15 @@ void Rectangle::draw(Window const& w, bool const h) const {
 }
 
 bool Rectangle::is_inside(Vec2 const& v_) {
-    Vec2 v1_, v2_;
-    max_.x >= min_.x ? v1_.x = max_.x, v2_.x = min_.x : v1_.x = min_.x, v2_.x = max_.x ;
-    max_.y >= min_.y ? v1_.y = max_.y, v2_.y = min_.y : v1_.y = min_.y, v2_.y = max_.y ;
-    if ((v1_.x > v_.x || v2_.x < v_.x) || (v1_.y > v_.y || v2_.y < v_.y)) return false;
+    Vec2 a_{max_}, b_{min_};
+    if (max_.x < min_.x) {
+        a_.x = min_.x;
+        b_.x = max_.x;
+    }
+    if (max_.y < min_.y) {
+        a_.y = min_.y;
+        b_.y = max_.y;
+    }
+    if ((a_.x < v_.x || b_.x > v_.x) || (a_.y < v_.y || b_.y > v_.y)) return false;
     return true;
 }
