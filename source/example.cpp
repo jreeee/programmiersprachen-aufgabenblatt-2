@@ -31,6 +31,7 @@ int main(int argc, char* argv[])
     Circle cir2_ {200.0f, {400.0f, 400.0f}};
     bool ic_ = cir2_.is_inside(mp_);
     cir2_.draw(win, ic_);
+    //still need to implement and use the <array> for better usability
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
 

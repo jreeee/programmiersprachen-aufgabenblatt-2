@@ -10,6 +10,7 @@
 int main(int argc, char* argv[])
 {
     Window win{std::make_pair(800,800)};
+    //origin_: middle of the clock
     Vec2 origin_ {400.0f, 400.0f};
     Circle outer_{380.0f, origin_, {0.1f, 0.1f, 0.1f}};
     Circle inner_{20.0f, origin_, {0.2f, 0.2f, 0.2f}};

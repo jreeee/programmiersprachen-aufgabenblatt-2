@@ -40,11 +40,14 @@ float Circle::circumference() {
 void Circle::draw(Window const& w, bool const h) const {
     Color c_;
     h ? c_ = highlight_color_ : c_ = col_;
+    /* calculating the actual coordinates for a point on the edge 
+    of the circle and using it as a template to rotate the following vectors */
     float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
     const Vec2 origin_ {r_, r_};
     Vec2 v1_{origin_};
     Vec2 v2_{origin_};
     int i_ = 1;
+    //made the segments usable for the rotation matrix via part_
     const int seg_ = 200;
     const float part_ = seg_ / (2 * M_PI);
     v2_ = v2_ + mid_;

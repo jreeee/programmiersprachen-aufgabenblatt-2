@@ -4,7 +4,7 @@
 #include <iostream>
 
 Mat2& Mat2::operator*=(Mat2 const& m) {
-    //cooler but overly complicated
+    //cooler but overly complicated & recsource intensive
     /*Mat2 a{*this};
     Mat2 b{
         a.e_00 * m.e_00 + a.e_10 * m.e_01,

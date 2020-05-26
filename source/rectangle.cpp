@@ -9,7 +9,6 @@
 Rectangle::Rectangle() {
     min_ = {0.0f, 0.0f};
     max_ = {50.0f, 50.0f};
-    col_ = {};
     highlight_color_ = {0.0f, 1.0f, 0.0f};
 }
 Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2) {
@@ -47,6 +46,7 @@ void Rectangle::draw(Window const& w, bool const h) const {
 }
 
 bool Rectangle::is_inside(Vec2 const& v_) {
+    //a_ and b_ make sure that a_ is actually max_ and b_ is actually min_
     Vec2 a_{max_}, b_{min_};
     if (max_.x < min_.x) {
         a_.x = min_.x;
