@@ -33,4 +33,18 @@ target_link_libraries(tests
   ${OPENGL_LIBRARIES}
   )
 
-
+add_executable(clock
+  clock.cpp
+  window.cpp
+  glew.c
+  circle.cpp
+  mat2.cpp
+  vec2.cpp
+  )
+target_link_libraries(clock
+  glfw
+  ${GLFW_LIBRARIES}
+  nanovg
+  ${OPENGL_LIBRARIES}
+  )
+add_dependencies(clock glfw nanovg ${COPY_BINARY})
