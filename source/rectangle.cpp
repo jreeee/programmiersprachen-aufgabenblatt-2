@@ -18,21 +18,14 @@ Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2) {
     highlight_color_ = {0.0f, 1.0f, 0.0f};
 }
 Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c) {
-    min_ = v1;
-    max_ = v2;
+    Rectangle{v1, v2};
     col_ = c;
-    highlight_color_ = {0.0f, 1.0f, 0.0f};
 }
 Rectangle::Rectangle(Color const& c, Vec2 const& v1, Vec2 const& v2) {
-    min_ = v1;
-    max_ = v2;
-    col_ = c;
-    highlight_color_ = {0.0f, 1.0f, 0.0f};
+    Rectangle{v1, v2, c};
 }
 Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c, Color const& h) {
-    min_ = v1;
-    max_ = v2;
-    col_ = c;
+    Rectangle{v1, v2, c};
     highlight_color_ = h;
 }
 
@@ -51,4 +44,10 @@ void Rectangle::draw(Window const& w, bool const h) const {
     w.draw_line(min_.x, max_.y, max_.x, max_.y, c_.red, c_.green, c_.blue, 1.0f);
 }
 
-
+bool Rectangle::is_inside(Vec2 const& v_) {
+    Vec2 v1_, v2_;
+    max_.x >= min_.x ? v1_.x = max_.x, v2_.x = min_.x : v1_.x = min_.x, v2_.x = max_.x ;
+    max_.y >= min_.y ? v1_.y = max_.y, v2_.y = min_.y : v1_.y = min_.y, v2_.y = max_.y ;
+    if ((v1_.x > v_.x || v2_.x < v_.x) || (v1_.y > v_.y || v2_.y < v_.y)) return false;
+    return true;
+}

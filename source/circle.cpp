@@ -20,27 +20,17 @@ Circle::Circle(float f, Vec2 const& v) {
     highlight_color_ = {1.0f, 0.0f, 0.0f};
 }
 Circle::Circle(Vec2 const& v, float f) {
-    mid_ = v;
-    rad_ = f;
-    col_ = {};
-    highlight_color_ = {1.0f, 0.0f, 0.0f};
+    Circle{f, v};
 }
 Circle::Circle(float f, Vec2 const& v, Color const& c) {
-    rad_ = f;
-    mid_ = v;
+    Circle{f, v};
     col_ = c;
-    highlight_color_ = {1.0f, 0.0f, 0.0f};
 }
 Circle::Circle(Vec2 const& v, float f, Color const& c) {
-    mid_ = v;
-    rad_ = f;
-    col_ = c;
-    highlight_color_ = {1.0f, 0.0f, 0.0f};
+    Circle{f, v, c};
 }
 Circle::Circle(float f, Vec2 const& v, Color const& c, Color const& h) {
-    rad_ = f;
-    mid_ = v;
-    col_ = c;
+    Circle{f, v, c};
     highlight_color_ = h;
 }
 
