@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
     
     auto mouse = win.mouse_position();
     Vec2 mp{float(mouse.first), float(mouse.second)};
-    for(int i = 0; i < ac.size(); i++) {
+    for(unsigned int i = 0; i < ac.size(); i++) {
       in = ac[i].is_inside(mp);
       ac[i].draw(win, in);
       in = ar[i].is_inside(mp);
