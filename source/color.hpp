@@ -3,9 +3,9 @@
 
 struct Color
 {
-    float red = 0.5f;
-    float green = 0.5f;
-    float blue = 0.5f;
+    float r_ = 0.5f;
+    float g_ = 0.5f;
+    float b_ = 0.5f;
 
 };
 

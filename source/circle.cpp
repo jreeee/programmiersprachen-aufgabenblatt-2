@@ -1,7 +1,8 @@
+#include "circle.hpp"
+
 #include "vec2.hpp"
 #include "color.hpp"
 #include "window.hpp"
-#include "circle.hpp"
 #include "mat2.hpp"
 
 #include <cmath>
@@ -38,44 +39,44 @@ float Circle::circumference() {
 }
 
 void Circle::draw(Window const& w, bool const h) const {
-    Color c_;
-    h ? c_ = highlight_color_ : c_ = col_;
+    Color c;
+    h ? c = highlight_color_ : c = col_;
     /* calculating the actual coordinates for a point on the edge 
     of the circle and using it as a template to rotate the following vectors */
-    float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
-    const Vec2 origin_ {r_, r_};
-    Vec2 v1_{origin_};
-    Vec2 v2_{origin_};
-    int i_ = 1;
+    float r = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
+    const Vec2 origin {r, r};
+    Vec2 v1{origin};
+    Vec2 v2{origin};
+    int i = 1;
     //made the segments usable for the rotation matrix via part_
-    const int seg_ = 200;
-    const float part_ = seg_ / (2 * M_PI);
-    v2_ = v2_ + mid_;
-    while (i_ <= seg_) {
-        v1_ = v2_;
-        v2_ = origin_;
-        v2_ = make_rotation_mat2(i_ / part_) * v2_;
-        v2_ = mid_ + v2_;
-        w.draw_line(v1_.x, v1_.y, v2_.x, v2_.y, c_.red, c_.green, c_.blue, 1.0f);
-        i_++;
+    const int seg = 200;
+    const float part = seg / (2 * M_PI);
+    v2 = v2 + mid_;
+    while (i <= seg) {
+        v1 = v2;
+        v2 = origin;
+        v2 = make_rotation_mat2(i / part) * v2;
+        v2 = mid_ + v2;
+        w.draw_line(v1.x_, v1.y_, v2.x_, v2.y_, c.r_, c.g_, c.b_, 1.0f);
+        i++;
     }
 }
 
 bool Circle::is_inside(Vec2 const& v) {
-    Vec2 vdist_ = mid_ - v;
-    float dist_ = sqrt((vdist_.x * vdist_.x) + (vdist_.y * vdist_.y));
-    return (dist_ <= abs(rad_) ? true : false);
+    Vec2 vdist = mid_ - v;
+    float dist = sqrt((vdist.x_ * vdist.x_) + (vdist.y_ * vdist.y_));
+    return (dist <= abs(rad_) ? true : false);
 }
 
 //this method is only needed for the clock
 void Circle::line(Window const& w, float time, float passed, float thickness) {
-    float r_ = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
-    const Vec2 origin_ {r_, r_};
-    Vec2 v1_{origin_};
+    float r = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
+    const Vec2 origin {r, r};
+    Vec2 v1{origin};
     //used to rotate the default vector via rotation matrix to the 12' position
-    const float zero_ = (3.0f / 4.0f) * M_PI;
-    const float part_ = 60 / (2 * M_PI);
-    v1_ = make_rotation_mat2(((passed / time) / -part_) + zero_) * v1_ ;
-    v1_ = mid_ + v1_;
-    w.draw_line(v1_.x, v1_.y, mid_.x, mid_.y, col_.red, col_.green, col_.blue, thickness);
+    const float vzero = (3.0f / 4.0f) * M_PI;
+    const float part = 60 / (2 * M_PI);
+    v1 = make_rotation_mat2(((passed / time) / - part) + vzero) * v1 ;
+    v1 = mid_ + v1;
+    w.draw_line(v1.x_, v1.y_, mid_.x_, mid_.y_, col_.r_, col_.g_, col_.b_, thickness);
 }

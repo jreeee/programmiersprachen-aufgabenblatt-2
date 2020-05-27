@@ -1,13 +1,14 @@
 #include "window.hpp"
 #include <GLFW/glfw3.h>
 #include <utility>
-#include <cmath>
-#include <array>
+
 #include "circle.hpp"
 #include "rectangle.hpp"
 #include "color.hpp"
 #include "vec2.hpp"
 
+#include <cmath>
+#include <array>
 
 int main(int argc, char* argv[])
 {
@@ -18,13 +19,13 @@ int main(int argc, char* argv[])
   Rectangle r3 {{600.0f, 200.0f},{700.0f, 300.0f},{0.8f, 0.4f, 0.3f},{0.4f, 0.2f, 0.0f}};
   Rectangle r4 {{300.0f, 600.0f},{500.0f, 550.0f},{0.2f, 0.1f, 0.4f},{0.5f, 0.6f, 0.7f}};
   Rectangle r5 {{450.0f, 100.0f},{400.0f, 200.0f},{0.1f, 0.5f, 0.5f},{0.6f, 0.7f, 0.1f}};
-  std::array<Rectangle, 5> ar_{r1, r2, r3, r4, r5};
+  std::array<Rectangle, 5> ar{r1, r2, r3, r4, r5};
   Circle c1 {};
   Circle c2 {21.0f,{}};
   Circle c3 {270.0f,{500.0f, 300.0f},{0.3f, 0.5f, 0.9f},{0.9f, 0.3f, 0.5f}};
   Circle c4 {150.0f,{700.0f, 600.0f},{0.4f, 0.6f, 0.2f}, {1.0f, 0.f, 1.0f}};
   Circle c5 {34.0f,{600.0f, 200.0f},{0.1, 0.6f, 0.3f},{0.1f, 0.9f, 0.6f}};
-  std::array<Circle, 5> ac_{c1,c2,c3,c4,c5};
+  std::array<Circle, 5> ac{c1,c2,c3,c4,c5};
   bool in = false;
 
   while (!win.should_close()) {
@@ -32,13 +33,13 @@ int main(int argc, char* argv[])
       win.close();
     }
     
-    auto mouse_ = win.mouse_position();
-    Vec2 mp_{float(mouse_.first), float(mouse_.second)};
-    for(int i = 0; i < ac_.size(); i++) {
-      in = ac_[i].is_inside(mp_);
-      ac_[i].draw(win, in);
-      in = ar_[i].is_inside(mp_);
-      ar_[i].draw(win, in);
+    auto mouse = win.mouse_position();
+    Vec2 mp{float(mouse.first), float(mouse.second)};
+    for(int i = 0; i < ac.size(); i++) {
+      in = ac[i].is_inside(mp);
+      ac[i].draw(win, in);
+      in = ar[i].is_inside(mp);
+      ar[i].draw(win, in);
     }
 
     bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;

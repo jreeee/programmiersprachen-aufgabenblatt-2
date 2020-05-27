@@ -1,21 +1,22 @@
 #include "vec2.hpp"
+
 #include <iostream>
 
 Vec2& Vec2::operator+=(Vec2 const& v) {
-    x+=v.x;
-    y+=v.y;
+    x_ += v.x_;
+    y_ += v.y_;
     return *this;
 }
 
 Vec2& Vec2::operator-=(Vec2 const& v) {
-    x-=v.x;
-    y-=v.y;
+    x_ -= v.x_;
+    y_ -= v.y_;
     return *this;
 }
 
 Vec2& Vec2::operator*=(float s) {
-    x*=s;
-    y*=s;
+    x_ *= s;
+    y_ *= s;
     return *this;
 }
 
@@ -24,8 +25,8 @@ Vec2& Vec2::operator/=(float s) {
         std::cout << "ERROR: division by zero (Vec2)\n";
     }
     else {
-        x/=s;
-        y/=s;
+        x_ /= s;
+        y_ /= s;
     }
     return *this;
 }

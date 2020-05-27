@@ -1,9 +1,10 @@
+#include "rectangle.hpp"
+
 #include "vec2.hpp"
 #include "color.hpp"
 #include "window.hpp"
-#include "rectangle.hpp"
-#include <iostream>
 
+#include <iostream>
 #include <cmath>
 
 Rectangle::Rectangle() {
@@ -31,31 +32,31 @@ Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c, Color const
 }
 
 float Rectangle::circumference() {
-    float xlen_ = abs(max_.x - min_.x);
-    float ylen_ = abs(max_.y - min_.y);
-    return 2 * (xlen_ + ylen_);
+    float xlen = abs(max_.x_ - min_.x_);
+    float ylen = abs(max_.y_ - min_.y_);
+    return 2 * (xlen + ylen);
 }
 
 void Rectangle::draw(Window const& w, bool const h) const {
-    Color c_;
-    h ? c_ = highlight_color_ : c_ = col_;
-    w.draw_line(max_.x, max_.y, max_.x, min_.y, c_.red, c_.green, c_.blue, 1.0f);
-    w.draw_line(max_.x, min_.y, min_.x, min_.y, c_.red, c_.green, c_.blue, 1.0f);
-    w.draw_line(min_.x, min_.y, min_.x, max_.y, c_.red, c_.green, c_.blue, 1.0f);
-    w.draw_line(min_.x, max_.y, max_.x, max_.y, c_.red, c_.green, c_.blue, 1.0f);
+    Color c;
+    h ? c = highlight_color_ : c = col_;
+    w.draw_line(max_.x_, max_.y_, max_.x_, min_.y_, c.r_, c.g_, c.b_, 1.0f);
+    w.draw_line(max_.x_, min_.y_, min_.x_, min_.y_, c.r_, c.g_, c.b_, 1.0f);
+    w.draw_line(min_.x_, min_.y_, min_.x_, max_.y_, c.r_, c.g_, c.b_, 1.0f);
+    w.draw_line(min_.x_, max_.y_, max_.x_, max_.y_, c.r_, c.g_, c.b_, 1.0f);
 }
 
 bool Rectangle::is_inside(Vec2 const& v_) {
     //a_ and b_ make sure that a_ is actually max_ and b_ is actually min_
-    Vec2 a_{max_}, b_{min_};
-    if (max_.x < min_.x) {
-        a_.x = min_.x;
-        b_.x = max_.x;
+    Vec2 a{max_}, b{min_};
+    if (max_.x_ < min_.x_) {
+        a.x_ = min_.x_;
+        b.x_ = max_.x_;
     }
-    if (max_.y < min_.y) {
-        a_.y = min_.y;
-        b_.y = max_.y;
+    if (max_.y_ < min_.y_) {
+        a.y_ = min_.y_;
+        b.y_ = max_.y_;
     }
-    if ((a_.x < v_.x || b_.x > v_.x) || (a_.y < v_.y || b_.y > v_.y)) return false;
+    if ((a.x_ < v_.x_ || b.x_ > v_.x_) || (a.y_ < v_.y_ || b.y_ > v_.y_)) return false;
     return true;
 }

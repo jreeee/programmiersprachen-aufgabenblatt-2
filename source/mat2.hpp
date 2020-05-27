@@ -2,6 +2,7 @@
 #define MAT2_HPP
 
 #include "vec2.hpp"
+
 #include <array>
 
 struct Mat2

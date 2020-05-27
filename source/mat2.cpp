@@ -1,5 +1,7 @@
 #include "mat2.hpp"
+
 #include "vec2.hpp"
+
 #include <cmath>
 #include <iostream>
 
@@ -34,7 +36,7 @@ Mat2 operator*(Mat2 const& m1, Mat2 const& m2) {
     return Mat2(m1) *= m2;
 }
 Vec2 operator*(Mat2 const& m, Vec2 const& v) {
-    return {v.x * (m.e_00 + m.e_01), v.y * (m.e_10 + m.e_11)}; 
+    return {v.x_ * (m.e_00 + m.e_01), v.y_ * (m.e_10 + m.e_11)}; 
 }
 
 Mat2 inverse(Mat2 const& m) {
