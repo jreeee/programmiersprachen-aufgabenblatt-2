@@ -15,10 +15,10 @@ class Circle {
     Circle(Vec2 const& v, float const f, Color const& c);
     Circle(float const f, Vec2 const& v, Color const& c, Color const& h);
 
-    float circumference();
+    float circumference() const;
     void draw(Window const& w, bool highlight = false) const;
-    bool is_inside(Vec2 const& v);
-    void line(Window const& w, float time, float passed, float thickness);
+    bool is_inside(Vec2 const& v) const;
+    void line(Window const& w, float time, float passed, float thickness) const;
 
     private:
     Vec2 mid_;

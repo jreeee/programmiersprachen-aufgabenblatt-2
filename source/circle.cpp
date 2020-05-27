@@ -34,7 +34,7 @@ Circle::Circle(float f, Vec2 const& v, Color const& c, Color const& h) {
     highlight_color_ = h;
 }
 
-float Circle::circumference() {
+float Circle::circumference() const {
     return 2 * M_PI * abs(rad_);
 }
 
@@ -62,14 +62,14 @@ void Circle::draw(Window const& w, bool const h) const {
     }
 }
 
-bool Circle::is_inside(Vec2 const& v) {
+bool Circle::is_inside(Vec2 const& v) const {
     Vec2 vdist = mid_ - v;
     float dist = sqrt((vdist.x_ * vdist.x_) + (vdist.y_ * vdist.y_));
     return (dist <= abs(rad_) ? true : false);
 }
 
 //this method is only needed for the clock
-void Circle::line(Window const& w, float time, float passed, float thickness) {
+void Circle::line(Window const& w, float time, float passed, float thickness) const {
     float r = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
     const Vec2 origin {r, r};
     Vec2 v1{origin};

@@ -31,7 +31,7 @@ Rectangle::Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c, Color const
     highlight_color_ = h;
 }
 
-float Rectangle::circumference() {
+float Rectangle::circumference() const {
     float xlen = abs(max_.x_ - min_.x_);
     float ylen = abs(max_.y_ - min_.y_);
     return 2 * (xlen + ylen);
@@ -46,7 +46,7 @@ void Rectangle::draw(Window const& w, bool const h) const {
     w.draw_line(min_.x_, max_.y_, max_.x_, max_.y_, c.r_, c.g_, c.b_, 1.0f);
 }
 
-bool Rectangle::is_inside(Vec2 const& v_) {
+bool Rectangle::is_inside(Vec2 const& v_) const {
     //a_ and b_ make sure that a_ is actually max_ and b_ is actually min_
     Vec2 a{max_}, b{min_};
     if (max_.x_ < min_.x_) {

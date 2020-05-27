@@ -14,9 +14,9 @@ class Rectangle {
     Rectangle(Color const& c, Vec2 const& v1, Vec2 const& v2);
     Rectangle(Vec2 const& v1, Vec2 const& v2, Color const& c, Color const& h);
     
-    float circumference();
+    float circumference() const;
     void draw(Window const& w, bool highlight = false) const;
-    bool is_inside(Vec2 const& v);
+    bool is_inside(Vec2 const& v) const;
 
     private:
     Vec2 min_;
