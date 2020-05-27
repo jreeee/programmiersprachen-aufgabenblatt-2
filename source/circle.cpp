@@ -37,7 +37,9 @@ Circle::Circle(float f, Vec2 const& v, Color const& c, Color const& h) {
 float Circle::circumference() const {
     return 2 * M_PI * abs(rad_);
 }
-
+void Circle::draw(Window const& w) const {
+    draw(w, false, 1.0f);
+}
 void Circle::draw(Window const& w, bool const h, float const t) const {
     Color c;
     h ? c = highlight_color_ : c = col_;
