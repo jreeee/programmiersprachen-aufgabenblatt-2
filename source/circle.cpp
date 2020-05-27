@@ -38,7 +38,7 @@ float Circle::circumference() const {
     return 2 * M_PI * abs(rad_);
 }
 
-void Circle::draw(Window const& w, bool const h) const {
+void Circle::draw(Window const& w, bool const h, float const t) const {
     Color c;
     h ? c = highlight_color_ : c = col_;
     /* calculating the actual coordinates for a point on the edge 
@@ -57,7 +57,7 @@ void Circle::draw(Window const& w, bool const h) const {
         v2 = origin;
         v2 = make_rotation_mat2(i / part) * v2;
         v2 = mid_ + v2;
-        w.draw_line(v1.x_, v1.y_, v2.x_, v2.y_, c.r_, c.g_, c.b_, 1.0f);
+        w.draw_line(v1.x_, v1.y_, v2.x_, v2.y_, c.r_, c.g_, c.b_, t);
         i++;
     }
 }
@@ -69,7 +69,7 @@ bool Circle::is_inside(Vec2 const& v) const {
 }
 
 //this method is only needed for the clock
-void Circle::line(Window const& w, float time, float passed, float thickness) const {
+void Circle::line(Window const& w, float time, float passed, float thickness, float dist) const {
     float r = sqrt((rad_ / 2) * (rad_ / 2) * 2 );
     const Vec2 origin {r, r};
     Vec2 v1{origin};
@@ -77,6 +77,16 @@ void Circle::line(Window const& w, float time, float passed, float thickness) co
     const float vzero = (3.0f / 4.0f) * M_PI;
     const float part = 60 / (2 * M_PI);
     v1 = make_rotation_mat2(((passed / time) / - part) + vzero) * v1 ;
-    v1 = mid_ + v1;
-    w.draw_line(v1.x_, v1.y_, mid_.x_, mid_.y_, col_.r_, col_.g_, col_.b_, thickness);
+    if (dist != 0)  {
+        //only for the min/quart/hr marks
+        Circle c{rad_- dist, mid_,{0.36f, 0.36f, 0.36f}};
+        c.line(w, time, passed, thickness + 0.2f);
+        v1 = mid_ + v1;
+        w.draw_line(v1.x_, v1.y_, mid_.x_, mid_.y_, col_.r_, col_.g_, col_.b_, thickness);
+        c.line(w, time, passed, thickness + 0.2f);
+    }
+    else {
+        v1 = mid_ + v1;
+        w.draw_line(v1.x_, v1.y_, mid_.x_, mid_.y_, col_.r_, col_.g_, col_.b_, thickness);
+    }
 }
